@@ -414,6 +414,10 @@
     </style>
 </head>
 <body>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <div class="container">
         <header>
             <h1>🎬 Platform Kelas Editing</h1>
@@ -449,6 +453,22 @@
     </div>
 
     <script>
+        // ===== KONFIGURASI FIREBASE =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyBakjlWu0_PCfJYNJRsNScmpD1bJVQetMU",
+            authDomain: "aqting-aqal.firebaseapp.com",
+            databaseURL: "https://aqting-aqal-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "aqting-aqal",
+            storageBucket: "aqting-aqal.firebasestorage.app",
+            messagingSenderId: "135142655439",
+            appId: "1:135142655439:web:f837fc608ab3504713beba",
+            measurementId: "G-CN352K3SDG"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
         // Data materi editing dengan bulan
         const courses = [
             // Oktober 2025
@@ -569,6 +589,28 @@
 
         let comments = {};
         let selectedMonth = 'all';
+
+        // Load comments from Firebase
+        function loadComments() {
+            const commentsRef = database.ref('comments');
+            
+            commentsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    comments = data;
+                    // Update comments if modal is open
+                    if (window.currentCourseId) {
+                        renderComments(window.currentCourseId);
+                    }
+                }
+            });
+        }
+
+        // Save comment to Firebase
+        function saveComment(courseId, comment) {
+            const commentsRef = database.ref('comments/' + courseId);
+            commentsRef.push(comment);
+        }
 
         // Get unique months
         function getUniqueMonths() {
@@ -697,39 +739,45 @@
 
             const courseId = window.currentCourseId;
             
-            if (!comments[courseId]) {
-                comments[courseId] = [];
-            }
-
-            comments[courseId].push({
+            const newComment = {
                 author: name,
                 text: text,
-                time: new Date().toLocaleString('id-ID')
-            });
+                time: new Date().toLocaleString('id-ID'),
+                timestamp: Date.now()
+            };
+
+            // Save to Firebase
+            saveComment(courseId, newComment);
 
             document.getElementById('commentInput').value = '';
-            renderComments(courseId);
+            
+            // Show success message
+            alert('✅ Komentar berhasil ditambahkan dan tersimpan!');
         }
 
         function renderComments(courseId) {
             const commentList = document.getElementById('commentList');
-            const courseComments = comments[courseId] || [];
+            const courseComments = comments[courseId];
 
-            if (courseComments.length === 0) {
+            if (!courseComments || Object.keys(courseComments).length === 0) {
                 commentList.innerHTML = '<div class="no-comments">Belum ada komentar. Jadilah yang pertama berkomentar!</div>';
                 return;
             }
 
-            commentList.innerHTML = courseComments.map(comment => `
+            // Convert object to array and sort by timestamp
+            const commentsArray = Object.values(courseComments).sort((a, b) => b.timestamp - a.timestamp);
+
+            commentList.innerHTML = commentsArray.map(comment => `
                 <div class="comment-item">
                     <div class="comment-author">${comment.author}</div>
                     <div class="comment-time">${comment.time}</div>
                     <div class="comment-text">${comment.text}</div>
                 </div>
-            `).reverse().join('');
+            `).join('');
         }
 
         // Initialize
+        loadComments();
         renderMonthButtons();
         renderCourses();
 
@@ -741,4 +789,4 @@
         });
     </script>
 </body>
-</html>
+</html
