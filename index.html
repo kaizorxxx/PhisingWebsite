@@ -1,100 +1,743 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Login Page dengan GitHub Submit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Kelas Editing</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-        }
-        .login-box {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0;
             box-sizing: border-box;
         }
-        input[type="submit"] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdfdf1;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #00311e;
+            color: #fdfdf1;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,49,30,0.3);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .month-filter {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,49,30,0.1);
+        }
+
+        .month-filter h3 {
+            color: #00311e;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .month-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .month-btn {
+            background: #fdfdf1;
+            color: #00311e;
+            border: 2px solid #00311e;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
+
+        .month-btn:hover {
+            background: #00311e;
+            color: #fdfdf1;
+            transform: translateY(-2px);
         }
-        #status {
-            margin-top: 15px;
-            text-align: center;
+
+        .month-btn.active {
+            background: #00311e;
+            color: #fdfdf1;
+        }
+
+        .course-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            background: #00311e;
+            color: #fdfdf1;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+        }
+
+        .section-count {
+            background: #fdfdf1;
+            color: #00311e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,49,30,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,49,30,0.2);
+            border-color: #00311e;
+        }
+
+        .course-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #00311e 0%, #005a36 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdfdf1;
+            font-size: 3em;
+            position: relative;
+        }
+
+        .duration-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(253, 253, 241, 0.95);
+            color: #00311e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.4em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 1.3em;
+            color: #00311e;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .course-description {
             color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .course-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upload-time {
+            color: #666;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .level-badge {
+            background: #00311e;
+            color: #fdfdf1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,49,30,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #00311e;
+            color: #fdfdf1;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            background: #005a36;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            padding: 25px;
+        }
+
+        .video-title {
+            font-size: 1.8em;
+            color: #00311e;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .video-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .comments-section {
+            padding: 0 25px 25px;
+            border-top: 2px solid #f0f0f0;
+            margin-top: 20px;
+        }
+
+        .comments-title {
+            font-size: 1.3em;
+            color: #00311e;
+            margin: 20px 0 15px;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #00311e;
+        }
+
+        .name-input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: #00311e;
+        }
+
+        .submit-btn {
+            background: #00311e;
+            color: #fdfdf1;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background: #005a36;
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .comment-item {
+            background: #fdfdf1;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00311e;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #00311e;
+            margin-bottom: 5px;
+        }
+
+        .comment-time {
+            font-size: 0.8em;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .comment-text {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+
+            .month-buttons {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <input type="submit" value="Login">
-        </form>
-        <div id="status"></div>
+    <div class="container">
+        <header>
+            <h1>🎬 Platform Kelas Editing</h1>
+            <p class="subtitle">Akses semua materi video editing Anda dengan mudah</p>
+        </header>
+
+        <div class="month-filter">
+            <h3>📅 Filter Berdasarkan Bulan</h3>
+            <div class="month-buttons" id="monthButtons"></div>
+        </div>
+
+        <div id="courseContainer"></div>
+    </div>
+
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div class="video-container" id="videoContainer"></div>
+            <div class="video-info">
+                <h2 class="video-title" id="modalTitle"></h2>
+                <p class="video-description" id="modalDescription"></p>
+            </div>
+            <div class="comments-section">
+                <h3 class="comments-title">💬 Komentar</h3>
+                <div class="comment-form">
+                    <input type="text" id="nameInput" class="name-input" placeholder="Nama Anda...">
+                    <textarea id="commentInput" class="comment-input" placeholder="Tulis komentar atau pertanyaan Anda..."></textarea>
+                    <button class="submit-btn" onclick="addComment()">Kirim Komentar</button>
+                </div>
+                <div class="comment-list" id="commentList"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Data materi editing dengan bulan
+        const courses = [
+            // Oktober 2025
+            {
+                id: 1,
+                title: 'Dasar-Dasar Adobe Premiere Pro',
+                description: 'Pelajari interface dan tools dasar Premiere Pro untuk memulai editing video profesional',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '15:30',
+                level: 'Pemula',
+                icon: '🎥',
+                month: 'Oktober 2025',
+                uploadTime: '18 Okt 2025, 14:30'
+            },
+            {
+                id: 2,
+                title: 'Color Grading untuk Pemula',
+                description: 'Teknik color grading dasar untuk membuat video Anda lebih cinematik',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '22:45',
+                level: 'Pemula',
+                icon: '🎨',
+                month: 'Oktober 2025',
+                uploadTime: '15 Okt 2025, 10:15'
+            },
+            {
+                id: 3,
+                title: 'Transisi dan Efek Kreatif',
+                description: 'Belajar membuat transisi smooth dan efek visual yang menarik',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '18:20',
+                level: 'Menengah',
+                icon: '✨',
+                month: 'Oktober 2025',
+                uploadTime: '12 Okt 2025, 16:45'
+            },
+            // September 2025
+            {
+                id: 4,
+                title: 'Audio Mixing dan Sound Design',
+                description: 'Mengoptimalkan audio video Anda dengan teknik mixing profesional',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '25:10',
+                level: 'Menengah',
+                icon: '🎵',
+                month: 'September 2025',
+                uploadTime: '28 Sep 2025, 09:20'
+            },
+            {
+                id: 5,
+                title: 'Keyframe Animation Basics',
+                description: 'Memahami konsep keyframe untuk animasi yang smooth',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '20:15',
+                level: 'Pemula',
+                icon: '🔑',
+                month: 'September 2025',
+                uploadTime: '22 Sep 2025, 13:00'
+            },
+            // Agustus 2025
+            {
+                id: 6,
+                title: 'Motion Graphics dengan After Effects',
+                description: 'Membuat animasi dan motion graphics yang dinamis',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '30:00',
+                level: 'Lanjutan',
+                icon: '🎬',
+                month: 'Agustus 2025',
+                uploadTime: '30 Agt 2025, 11:30'
+            },
+            {
+                id: 7,
+                title: 'Export Settings untuk Media Sosial',
+                description: 'Setting export optimal untuk Instagram, TikTok, dan YouTube',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '12:15',
+                level: 'Pemula',
+                icon: '📱',
+                month: 'Agustus 2025',
+                uploadTime: '25 Agt 2025, 15:45'
+            },
+            {
+                id: 8,
+                title: 'Green Screen & Chroma Keying',
+                description: 'Teknik menghilangkan background hijau dengan sempurna',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '17:40',
+                level: 'Menengah',
+                icon: '🟢',
+                month: 'Agustus 2025',
+                uploadTime: '18 Agt 2025, 10:00'
+            },
+            // Juli 2025
+            {
+                id: 9,
+                title: 'Speed Ramping Techniques',
+                description: 'Membuat efek slow motion dan fast motion yang cinematik',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '14:30',
+                level: 'Menengah',
+                icon: '⚡',
+                month: 'Juli 2025',
+                uploadTime: '28 Jul 2025, 14:20'
+            },
+            {
+                id: 10,
+                title: 'Text Animation & Typography',
+                description: 'Membuat animasi teks yang menarik dan profesional',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                duration: '19:20',
+                level: 'Menengah',
+                icon: '📝',
+                month: 'Juli 2025',
+                uploadTime: '15 Jul 2025, 09:30'
+            }
+        ];
+
+        let comments = {};
+        let selectedMonth = 'all';
+
+        // Get unique months
+        function getUniqueMonths() {
+            const months = [...new Set(courses.map(c => c.month))];
+            return months.sort((a, b) => new Date(b) - new Date(a));
+        }
+
+        // Render month buttons
+        function renderMonthButtons() {
+            const months = getUniqueMonths();
+            const container = document.getElementById('monthButtons');
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const status = document.getElementById('status');
+            container.innerHTML = `
+                <button class="month-btn ${selectedMonth === 'all' ? 'active' : ''}" onclick="filterByMonth('all')">
+                    📚 Semua Materi
+                </button>
+                ${months.map(month => `
+                    <button class="month-btn ${selectedMonth === month ? 'active' : ''}" onclick="filterByMonth('${month}')">
+                        ${month}
+                    </button>
+                `).join('')}
+            `;
+        }
+
+        // Filter courses by month
+        function filterByMonth(month) {
+            selectedMonth = month;
+            renderMonthButtons();
+            renderCourses();
+        }
+
+        // Group courses by month
+        function groupCoursesByMonth() {
+            const filtered = selectedMonth === 'all' 
+                ? courses 
+                : courses.filter(c => c.month === selectedMonth);
             
-            // Simpan data ke GitHub
-            fetch('https://api.github.com/repos/[USERNAME]/[REPO]/contents/logindata.txt', {
-                method: 'PUT',
-                headers: {
-                    'Authorization': 'token [GITHUB_TOKEN]',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: 'Update login data',
-                    content: btoa(`Username: ${username}, Password: ${password}\n`),
-                    sha: '' // Kosongkan jika file belum ada
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                status.innerHTML = 'Data berhasil disimpan ke GitHub';
-                status.style.color = 'green';
-            })
-            .catch(error => {
-                status.innerHTML = 'Error menyimpan data: ' + error;
-                status.style.color = 'red';
+            const grouped = {};
+            filtered.forEach(course => {
+                if (!grouped[course.month]) {
+                    grouped[course.month] = [];
+                }
+                grouped[course.month].push(course);
             });
+            
+            return grouped;
+        }
+
+        // Render courses
+        function renderCourses() {
+            const container = document.getElementById('courseContainer');
+            const grouped = groupCoursesByMonth();
+            const months = Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a));
+
+            container.innerHTML = months.map(month => `
+                <div class="course-section">
+                    <div class="section-header">
+                        <div class="section-title">📅 ${month}</div>
+                        <div class="section-count">${grouped[month].length} Materi</div>
+                    </div>
+                    <div class="course-grid">
+                        ${grouped[month].map(course => `
+                            <div class="course-card" onclick="openVideo(${course.id})">
+                                <div class="course-thumbnail">
+                                    <div class="duration-badge">⏱️ ${course.duration}</div>
+                                    ${course.icon}
+                                </div>
+                                <div class="course-content">
+                                    <h3 class="course-title">${course.title}</h3>
+                                    <p class="course-description">${course.description}</p>
+                                    <div class="course-meta">
+                                        <div class="upload-time">🕒 Diupload: ${course.uploadTime}</div>
+                                        <div class="course-info-row">
+                                            <span>📚 ${course.level}</span>
+                                            <span class="level-badge">${course.level}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVideo(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
+
+            const modal = document.getElementById('videoModal');
+            const videoContainer = document.getElementById('videoContainer');
+            
+            videoContainer.innerHTML = `<iframe src="${course.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            
+            document.getElementById('modalTitle').textContent = course.title;
+            document.getElementById('modalDescription').textContent = course.description + ' | Durasi: ' + course.duration + ' | Diupload: ' + course.uploadTime + ' | ' + course.month;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            window.currentCourseId = courseId;
+            renderComments(courseId);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('videoContainer').innerHTML = '';
+            document.getElementById('commentInput').value = '';
+        }
+
+        function addComment() {
+            const name = document.getElementById('nameInput').value.trim();
+            const text = document.getElementById('commentInput').value.trim();
+            
+            if (!name) {
+                alert('Silakan masukkan nama Anda');
+                return;
+            }
+            
+            if (!text) {
+                alert('Silakan tulis komentar Anda');
+                return;
+            }
+
+            const courseId = window.currentCourseId;
+            
+            if (!comments[courseId]) {
+                comments[courseId] = [];
+            }
+
+            comments[courseId].push({
+                author: name,
+                text: text,
+                time: new Date().toLocaleString('id-ID')
+            });
+
+            document.getElementById('commentInput').value = '';
+            renderComments(courseId);
+        }
+
+        function renderComments(courseId) {
+            const commentList = document.getElementById('commentList');
+            const courseComments = comments[courseId] || [];
+
+            if (courseComments.length === 0) {
+                commentList.innerHTML = '<div class="no-comments">Belum ada komentar. Jadilah yang pertama berkomentar!</div>';
+                return;
+            }
+
+            commentList.innerHTML = courseComments.map(comment => `
+                <div class="comment-item">
+                    <div class="comment-author">${comment.author}</div>
+                    <div class="comment-time">${comment.time}</div>
+                    <div class="comment-text">${comment.text}</div>
+                </div>
+            `).reverse().join('');
+        }
+
+        // Initialize
+        renderMonthButtons();
+        renderCourses();
+
+        // Close modal when clicking outside
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
         });
     </script>
 </body>
