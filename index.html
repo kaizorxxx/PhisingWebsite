@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platform Kelas Editing</title>
+    <title>AQTING</title>
     <style>
         * {
             margin: 0;
@@ -671,8 +671,8 @@
 
     <div class="container">
         <header>
-            <h1>🎬 Platform Kelas Editing</h1>
-            <p class="subtitle">Akses semua materi video editing Anda dengan mudah</p>
+            <h1>🎬 AQTING CLASS</h1>
+            <p class="subtitle">Akses semua materi video editing dengan mudah</p>
         </header>
 
         <div class="month-filter">
@@ -804,7 +804,9 @@
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">×</button>
-            <div class="video-container" id="videoContainer"></div>
+            <div class="video-container" id="videoContainer">
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
+            </div>
             <div class="video-info">
                 <h2 class="video-title" id="modalTitle"></h2>
                 <p class="video-description" id="modalDescription"></p>
@@ -840,7 +842,7 @@
 
         // Data materi editing dengan bulan
         const courses = [
-            // Oktober 2025
+                        // Oktober 2025
             {
                 id: 1,
                 title: 'Frame Freeze',
@@ -870,7 +872,7 @@
                 videoUrl: 'https://files.catbox.moe/9m37s6.mp4',
                 duration: '1:26',
                 level: 'Spring',
-                icon: '🎥,
+                icon: '🎥',
                 month: 'Oktober 2025',
                 uploadTime: '20 Okt 2025, 17:20'
             }
@@ -879,7 +881,7 @@
         let comments = {};
         let selectedMonth = 'all';
         let isAdminLoggedIn = false;
-        const ADMIN_PASSWORD = 'twCA6B0TWaSsd4LmH738goJGQi5xX9UFfP1ENqVIKhlRjOnrkMpDuve2bc8R'; // GANTI password ini dengan password Anda
+        const ADMIN_PASSWORD = 'admin123'; // GANTI password ini dengan password Anda
         let analytics = {
             visitors: 0,
             videoViews: {},
@@ -1041,22 +1043,14 @@
                         <source src="${course.videoUrl}" type="video/mp4">
                         Browser Anda tidak mendukung video.
                     </video>
+                    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
                 `;
             } else {
                 videoContainer.innerHTML = `
                     <iframe src="${course.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
                 `;
             }
-
-            // Add fullscreen button after video loads
-            setTimeout(() => {
-                const fullscreenBtn = document.createElement('button');
-                fullscreenBtn.className = 'fullscreen-btn';
-                fullscreenBtn.innerHTML = '⛶';
-                fullscreenBtn.title = 'Layar Penuh';
-                fullscreenBtn.onclick = toggleFullscreen;
-                videoContainer.appendChild(fullscreenBtn);
-            }, 100);
             
             document.getElementById('modalTitle').textContent = course.title;
             document.getElementById('modalDescription').textContent = course.description + ' | Durasi: ' + course.duration + ' | Diupload: ' + course.uploadTime + ' | ' + course.month;
@@ -1081,7 +1075,7 @@
                 document.exitFullscreen();
             }
             
-            document.getElementById('videoContainer').innerHTML = '';
+            document.getElementById('videoContainer').innerHTML = '<button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>';
             document.getElementById('commentInput').value = '';
         }
 
