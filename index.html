@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AQTING</title>
+    <title>Akses Ditolak - Website Diblokir</title>
     <style>
         * {
             margin: 0;
@@ -12,1470 +12,504 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fdfdf1;
+            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-duration: 8s;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            right: 15%;
+            top: 20%;
+            animation-duration: 10s;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            bottom: 30%;
+            animation-duration: 12s;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            bottom: 20%;
+            animation-duration: 9s;
+            animation-delay: 1s;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.3;
+            }
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 70px 50px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3), 
+                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            position: relative;
+            z-index: 10;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        header {
-            background: #00311e;
-            color: #fdfdf1;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,49,30,0.3);
-            margin-bottom: 30px;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Shield Icon */
+        .icon-wrapper {
+            margin: 0 auto 40px;
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .shield-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .shield {
+            width: 120px;
+            height: 140px;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            box-shadow: 0 20px 50px rgba(220, 38, 38, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-10px);
+            }
+        }
+
+        .shield::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .x-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+        }
+
+        .x-mark::before,
+        .x-mark::after {
+            content: '';
+            position: absolute;
+            background: white;
+            width: 70px;
+            height: 10px;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+        }
+
+        .x-mark::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .x-mark::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .warning-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
         }
 
         h1 {
-            font-size: 2em;
-            margin-bottom: 5px;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            opacity: 0.8;
-            font-size: 0.9em;
-        }
-
-        .month-filter {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,49,30,0.1);
-        }
-
-        .month-filter h3 {
-            color: #00311e;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .month-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .month-btn {
-            background: #fdfdf1;
-            color: #00311e;
-            border: 2px solid #00311e;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95em;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .month-btn:hover {
-            background: #00311e;
-            color: #fdfdf1;
-            transform: translateY(-2px);
-        }
-
-        .month-btn.active {
-            background: #00311e;
-            color: #fdfdf1;
-        }
-
-        .course-section {
-            margin-bottom: 40px;
-        }
-
-        .section-header {
-            background: #00311e;
-            color: #fdfdf1;
-            padding: 15px 25px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .section-title {
-            font-size: 1.4em;
-        }
-
-        .section-count {
-            background: #fdfdf1;
-            color: #00311e;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-        }
-
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .course-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,49,30,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,49,30,0.2);
-            border-color: #00311e;
-        }
-
-        .course-thumbnail {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #00311e 0%, #005a36 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fdfdf1;
-            font-size: 3em;
-            position: relative;
-        }
-
-        .duration-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(253, 253, 241, 0.95);
-            color: #00311e;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.4em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .course-content {
-            padding: 20px;
-        }
-
-        .course-title {
+            color: #dc2626;
             font-size: 1.3em;
-            color: #00311e;
-            margin-bottom: 10px;
             font-weight: 700;
-        }
-
-        .course-description {
-            color: #666;
-            font-size: 0.9em;
             margin-bottom: 15px;
-            line-height: 1.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .course-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 0.85em;
-            color: #999;
-        }
-
-        .course-info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .upload-time {
+        p {
             color: #666;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 1.15em;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .level-badge {
-            background: #00311e;
-            color: #fdfdf1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,49,30,0.9);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #00311e;
-            color: #fdfdf1;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2em;
-            z-index: 10;
-            font-weight: bold;
-        }
-
-        .close-btn:hover {
-            background: #005a36;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .video-container iframe,
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .fullscreen-btn {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0, 49, 30, 0.8);
-            color: #fdfdf1;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2em;
-            z-index: 20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .fullscreen-btn:hover {
-            background: rgba(0, 49, 30, 1);
-            transform: scale(1.1);
-        }
-
-        .fullscreen-btn:active {
-            transform: scale(0.95);
-        }
-
-        .video-info {
+        .warning-box {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(153, 27, 27, 0.1) 100%);
+            border-left: 5px solid #dc2626;
             padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: left;
         }
 
-        .video-title {
-            font-size: 1.8em;
-            color: #00311e;
+        .warning-box h3 {
+            color: #dc2626;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box h3::before {
+            content: '⚠️';
+            font-size: 1.5em;
+        }
+
+        .warning-box p {
             margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .warning-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .warning-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .warning-box li::before {
+            content: '×';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .blocked-url {
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            color: #374151;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .info-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(220, 38, 38, 0.1);
+        }
+
+        .info-title {
+            color: #dc2626;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .info-card h4 {
+            color: #374151;
+            font-size: 1em;
+            margin-bottom: 8px;
             font-weight: 700;
         }
 
-        .video-description {
+        .info-card p {
+            color: #6b7280;
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(220, 38, 38, 0.05);
+            border-radius: 10px;
+            font-size: 0.95em;
             color: #666;
             line-height: 1.6;
-            margin-bottom: 20px;
         }
 
-        .comments-section {
-            padding: 0 25px 25px;
-            border-top: 2px solid #f0f0f0;
-            margin-top: 20px;
-        }
-
-        .comments-title {
-            font-size: 1.3em;
-            color: #00311e;
-            margin: 20px 0 15px;
-        }
-
-        .comment-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .comment-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .comment-input:focus {
-            outline: none;
-            border-color: #00311e;
-        }
-
-        .name-input {
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95em;
-        }
-
-        .name-input:focus {
-            outline: none;
-            border-color: #00311e;
-        }
-
-        .submit-btn {
-            background: #00311e;
-            color: #fdfdf1;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: background 0.3s;
-            align-self: flex-start;
-        }
-
-        .submit-btn:hover {
-            background: #005a36;
-        }
-
-        .comment-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .comment-item {
-            background: #fdfdf1;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #00311e;
-        }
-
-        .comment-author {
-            font-weight: 600;
-            color: #00311e;
-            margin-bottom: 5px;
-        }
-
-        .comment-time {
-            font-size: 0.8em;
-            color: #999;
-            margin-bottom: 8px;
-        }
-
-        .comment-text {
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .no-comments {
-            text-align: center;
-            color: #999;
-            padding: 30px;
-            font-style: italic;
-        }
-
-        /* Admin Panel Styles */
-        .admin-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #00311e;
-            color: #fdfdf1;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 5px 20px rgba(0,49,30,0.3);
-            z-index: 999;
-            transition: all 0.3s;
-        }
-
-        .admin-toggle:hover {
-            background: #005a36;
-            transform: scale(1.05);
-        }
-
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1001;
-            overflow-y: auto;
-            padding: 20px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .admin-panel.active {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .admin-content {
-            background: white;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-
-        .admin-header {
-            background: #00311e;
-            color: #fdfdf1;
-            padding: 20px 30px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-close {
-            background: #fdfdf1;
-            color: #00311e;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .admin-body {
-            padding: 30px;
-        }
-
-        .admin-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .admin-tab {
-            background: transparent;
-            border: none;
-            padding: 12px 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            color: #666;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .admin-tab.active {
-            color: #00311e;
-            border-bottom-color: #00311e;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #00311e;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-family: inherit;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #00311e;
-        }
-
-        .btn-primary {
-            background: #00311e;
-            color: #fdfdf1;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #005a36;
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .btn-danger:hover {
-            background: #c82333;
-        }
-
-        .course-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .course-item {
-            background: #fdfdf1;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #00311e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .course-item-info h4 {
-            color: #00311e;
-            margin-bottom: 5px;
-        }
-
-        .course-item-info p {
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .course-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
+        .footer-note strong {
+            color: #dc2626;
         }
 
         @media (max-width: 768px) {
-            .course-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 50px 30px;
             }
 
             h1 {
-                font-size: 1.5em;
+                font-size: 2.2em;
             }
 
-            .modal-content {
-                max-height: 95vh;
+            .subtitle {
+                font-size: 1.1em;
             }
 
-            .month-buttons {
-                justify-content: center;
+            .info-cards {
+                grid-template-columns: 1fr;
             }
 
-            .admin-tabs {
-                flex-wrap: wrap;
+            .particle {
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
             }
 
-            .course-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+            p {
+                font-size: 1em;
+            }
+
+            .icon-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+
+            .shield {
+                width: 100px;
+                height: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
 
     <div class="container">
-        <header>
-            <h1>🎬 AQTING CLASS</h1>
-            <p class="subtitle">Akses semua materi video editing dengan mudah</p>
-        </header>
-
-        <div class="month-filter">
-            <h3>📅 Filter Berdasarkan Bulan</h3>
-            <div class="month-buttons" id="monthButtons"></div>
-        </div>
-
-        <div id="courseContainer"></div>
-    </div>
-
-    <!-- Admin Toggle Button -->
-    <button class="admin-toggle" onclick="toggleAdminPanel()">🔐 Admin Panel</button>
-
-    <!-- Admin Panel -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-content">
-            <div class="admin-header">
-                <h2>🎛️ Admin Panel - Kelola Platform</h2>
-                <button class="admin-close" onclick="toggleAdminPanel()">×</button>
-            </div>
-            <div class="admin-body">
-                <!-- Login Section -->
-                <div id="loginSection">
-                    <div class="login-form">
-                        <h3 style="text-align: center; color: #00311e; margin-bottom: 20px;">Login Admin</h3>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" id="adminPassword" placeholder="Masukkan password admin" autocomplete="off" inputmode="text">
-                        </div>
-                        <button class="btn-primary" onclick="loginAdmin()" style="width: 100%;">Login</button>
-                    </div>
-                </div>
-
-                <!-- Admin Content (Hidden until login) -->
-                <div id="adminContent" style="display: none;">
-                    <div class="admin-tabs">
-                        <button class="admin-tab active" onclick="switchTab('addCourse')">➕ Tambah Materi</button>
-                        <button class="admin-tab" onclick="switchTab('manageCourses')">📚 Kelola Materi</button>
-                        <button class="admin-tab" onclick="switchTab('manageComments')">💬 Kelola Komentar</button>
-                        <button class="admin-tab" onclick="switchTab('analytics')">📊 Analisis Pengunjung</button>
-                    </div>
-
-                    <!-- Tab: Tambah Materi -->
-                    <div id="addCourse" class="tab-content active">
-                        <h3 style="color: #00311e; margin-bottom: 20px;">Tambah Materi Baru</h3>
-                        <div class="form-group">
-                            <label>Judul Materi</label>
-                            <input type="text" id="newTitle" placeholder="Contoh: Dasar-Dasar Adobe Premiere Pro">
-                        </div>
-                        <div class="form-group">
-                            <label>Deskripsi</label>
-                            <textarea id="newDescription" placeholder="Deskripsi singkat tentang materi ini..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>URL Video (YouTube Embed)</label>
-                            <input type="text" id="newVideoUrl" placeholder="https://www.youtube.com/embed/VIDEO_ID">
-                        </div>
-                        <div class="form-group">
-                            <label>Durasi</label>
-                            <input type="text" id="newDuration" placeholder="15:30">
-                        </div>
-                        <div class="form-group">
-                            <label>Level</label>
-                            <select id="newLevel">
-                                <option value="Pemula">Pemula</option>
-                                <option value="Menengah">Menengah</option>
-                                <option value="Lanjutan">Lanjutan</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Icon (Emoji)</label>
-                            <input type="text" id="newIcon" placeholder="🎥" maxlength="2">
-                        </div>
-                        <div class="form-group">
-                            <label>Bulan</label>
-                            <input type="text" id="newMonth" placeholder="Oktober 2025">
-                        </div>
-                        <button class="btn-primary" onclick="addNewCourse()">➕ Tambah Materi</button>
-                    </div>
-
-                    <!-- Tab: Kelola Materi -->
-                    <div id="manageCourses" class="tab-content">
-                        <h3 style="color: #00311e; margin-bottom: 20px;">Kelola Materi</h3>
-                        <div class="course-list" id="adminCourseList"></div>
-                    </div>
-
-                    <!-- Tab: Kelola Komentar -->
-                    <div id="manageComments" class="tab-content">
-                        <h3 style="color: #00311e; margin-bottom: 20px;">Kelola Komentar</h3>
-                        <div id="adminCommentList"></div>
-                    </div>
-
-                    <!-- Tab: Analisis Pengunjung -->
-                    <div id="analytics" class="tab-content">
-                        <h3 style="color: #00311e; margin-bottom: 20px;">📊 Analisis Pengunjung</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                            <div style="background: linear-gradient(135deg, #00311e 0%, #005a36 100%); color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,49,30,0.2);">
-                                <div style="font-size: 0.9em; opacity: 0.9; margin-bottom: 10px;">👥 Total Pengunjung</div>
-                                <div style="font-size: 2.5em; font-weight: bold;" id="totalVisitors">0</div>
-                            </div>
-                            
-                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(102,126,234,0.2);">
-                                <div style="font-size: 0.9em; opacity: 0.9; margin-bottom: 10px;">👀 Total Views Video</div>
-                                <div style="font-size: 2.5em; font-weight: bold;" id="totalViews">0</div>
-                            </div>
-                            
-                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(240,147,251,0.2);">
-                                <div style="font-size: 0.9em; opacity: 0.9; margin-bottom: 10px;">💬 Total Komentar</div>
-                                <div style="font-size: 2.5em; font-weight: bold;" id="totalComments">0</div>
-                            </div>
-                        </div>
-
-                        <div style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 25px; margin-bottom: 20px;">
-                            <h4 style="color: #00311e; margin-bottom: 20px;">🏆 Video Paling Populer</h4>
-                            <div id="popularVideos"></div>
-                        </div>
-
-                        <div style="background: white; border: 2px solid #e0e0e0; border-radius: 15px; padding: 25px;">
-                            <h4 style="color: #00311e; margin-bottom: 20px;">📅 Aktivitas Pengunjung (7 Hari Terakhir)</h4>
-                            <div id="visitorActivity"></div>
-                        </div>
-                    </div>
+        <div class="icon-wrapper">
+            <div class="shield-container">
+                <div class="warning-glow"></div>
+                <div class="shield">
+                    <div class="x-mark"></div>
                 </div>
             </div>
         </div>
-    </div>
+        
+        <h1>Akses Ditolak</h1>
+        <p class="subtitle">⛔ Website Diblokir ⛔</p>
+        <p>Website yang Anda coba akses telah diblokir oleh Pemerintah Republik Indonesia berdasarkan peraturan perundang-undangan yang berlaku.</p>
+        
+        <div class="blocked-url">
+            🔒 www.example-blocked-site.com
+        </div>
 
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            <div class="video-container" id="videoContainer">
-                <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
-            </div>
-            <div class="video-info">
-                <h2 class="video-title" id="modalTitle"></h2>
-                <p class="video-description" id="modalDescription"></p>
-            </div>
-            <div class="comments-section">
-                <h3 class="comments-title">💬 Komentar</h3>
-                <div class="comment-form">
-                    <input type="text" id="nameInput" class="name-input" placeholder="Nama Anda...">
-                    <textarea id="commentInput" class="comment-input" placeholder="Tulis komentar atau pertanyaan Anda..."></textarea>
-                    <button class="submit-btn" onclick="addComment()">Kirim Komentar</button>
+        <div class="warning-box">
+            <h3>Alasan Pemblokiran</h3>
+            <p>Website ini diblokir karena mengandung konten yang melanggar:</p>
+            <ul>
+                <li>UU No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik</li>
+                <li>UU No. 19 Tahun 2016 tentang Perubahan UU ITE</li>
+                <li>Peraturan Menteri Komunikasi dan Informatika</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <div class="info-title">Informasi Lebih Lanjut</div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-card-icon">📋</div>
+                    <h4>Dasar Hukum</h4>
+                    <p>Pemblokiran sesuai regulasi pemerintah</p>
                 </div>
-                <div class="comment-list" id="commentList"></div>
+                <div class="info-card">
+                    <div class="info-card-icon">🛡️</div>
+                    <h4>Keamanan</h4>
+                    <p>Melindungi pengguna internet</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">⚖️</div>
+                    <h4>Kepatuhan</h4>
+                    <p>Mematuhi hukum Indonesia</p>
+                </div>
             </div>
+        </div>
+
+        <div class="footer-note">
+            <strong>Catatan:</strong> Jika Anda merasa pemblokiran ini adalah kesalahan, silakan hubungi Kementerian Komunikasi dan Informatika Republik Indonesia atau penyedia layanan internet Anda untuk informasi lebih lanjut.
         </div>
     </div>
 
     <script>
-        // ===== KONFIGURASI FIREBASE =====
-        const firebaseConfig = {
-            apiKey: "AIzaSyBakjlWu0_PCfJYNJRsNScmpD1bJVQetMU",
-            authDomain: "aqting-aqal.firebaseapp.com",
-            databaseURL: "https://aqting-aqal-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "aqting-aqal",
-            storageBucket: "aqting-aqal.firebasestorage.app",
-            messagingSenderId: "135142655439",
-            appId: "1:135142655439:web:f837fc608ab3504713beba",
-            measurementId: "G-CN352K3SDG"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // Data materi editing dengan bulan
-        const courses = [
-                        // Oktober 2025
-            {
-                id: 1,
-                title: 'Frame Freeze',
-                description: 'Materi Kali ini kita akan belajar "Frame Freeze" atau membekukan frame, Salah satu fitur yang Ada di spring Adapun bahan yang perlu disiapkan satu saja yaitu, video yang identik dengan vlogger atau ceramah pun boleh yang penting Ada objek nya yaa',
-                videoUrl: 'https://files.catbox.moe/i8p93g.mp4',
-                duration: '4:34',
-                level: 'Spring',
-                icon: '🎥',
-                month: 'Oktober 2025',
-                uploadTime: '19 Okt 2025, 21:45'
-            },
-            {
-                id: 2,
-                title: 'Free Transform',
-                description: 'Materi ke 2 ini kita masih menggunakan Spring gess, kita akan belajar tentang "Free Transform." Singkatnya,free transform ini memungkinkan kita buat customize sendiri perspektif dari teks kita. Untuk bahannya, temen-temen bisa pake "foto atau video." Pokoknya yang ada objeknya buat dikasih teks, detailnya ada di video gaiss. Selamat mengerjakan :)',
-                videoUrl: 'https://files.catbox.moe/etzii0.mp4',
-                duration: '4:19',
-                level: 'Spring',
-                icon: '🎥',
-                month: 'Oktober 2025',
-                uploadTime: '21 Okt 2025, 17:07'
-            },
-            {
-                id: 3,
-                title: 'Handwriting Effect',
-                description: 'Materi ke 3 ini kita masih menggunakan Spring sebagai software editing kita nih temen-temen, kita akan membuat Handwriting Effect. Untuk Background nya teman teman bebas pakai apa saja asal masih sopan, oh ya tambahan notes, ukuran video bebas, tapi lebih baik pakai ratio 9:16. terimakasih.',
-                videoUrl: 'https://files.catbox.moe/9m37s6.mp4',
-                duration: '1:26',
-                level: 'Spring',
-                icon: '🎥',
-                month: 'Oktober 2025',
-                uploadTime: '20 Okt 2025, 17:20'
-            }
-        ];
-
-        let comments = {};
-        let selectedMonth = 'all';
-        let isAdminLoggedIn = false;
-        const ADMIN_PASSWORD = 'admin123'; // GANTI password ini dengan password Anda
-        let analytics = {
-            visitors: 0,
-            videoViews: {},
-            dailyVisits: {}
-        };
-
-        // Load comments from Firebase
-        function loadComments() {
-            const commentsRef = database.ref('comments');
-            
-            commentsRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    comments = data;
-                    // Update comments if modal is open
-                    if (window.currentCourseId) {
-                        renderComments(window.currentCourseId);
-                    }
-                }
-            });
+        // Update blocked URL with current domain
+        const blockedUrlElement = document.querySelector('.blocked-url');
+        if (window.location.hostname) {
+            blockedUrlElement.innerHTML = '🔒 ' + window.location.hostname;
         }
 
-        // Load analytics from Firebase
-        function loadAnalytics() {
-            const analyticsRef = database.ref('analytics');
-            analyticsRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    analytics = data;
-                }
-            });
-        }
-
-        // Track visitor
-        function trackVisitor() {
-            const today = new Date().toLocaleDateString('id-ID');
+        // Auto-play background sound
+        window.addEventListener('DOMContentLoaded', function() {
+            const audio = new Audio();
+            // Using a dramatic warning/alert sound effect
+            audio.src = 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3';
+            audio.loop = true;
+            audio.volume = 0.3;
             
-            // Increment total visitors
-            const visitorsRef = database.ref('analytics/visitors');
-            visitorsRef.transaction((current) => {
-                return (current || 0) + 1;
-            });
-
-            // Track daily visits
-            const dailyRef = database.ref('analytics/dailyVisits/' + today);
-            dailyRef.transaction((current) => {
-                return (current || 0) + 1;
-            });
-        }
-
-        // Track video view
-        function trackVideoView(courseId) {
-            const viewRef = database.ref('analytics/videoViews/' + courseId);
-            viewRef.transaction((current) => {
-                return (current || 0) + 1;
-            });
-        }
-
-        // Save comment to Firebase
-        function saveComment(courseId, comment) {
-            const commentsRef = database.ref('comments/' + courseId);
-            commentsRef.push(comment);
-        }
-
-        // Get unique months
-        function getUniqueMonths() {
-            const months = [...new Set(courses.map(c => c.month))];
-            return months.sort((a, b) => new Date(b) - new Date(a));
-        }
-
-        // Render month buttons
-        function renderMonthButtons() {
-            const months = getUniqueMonths();
-            const container = document.getElementById('monthButtons');
+            // Try to autoplay
+            const playPromise = audio.play();
             
-            container.innerHTML = `
-                <button class="month-btn ${selectedMonth === 'all' ? 'active' : ''}" onclick="filterByMonth('all')">
-                    📚 Semua Materi
-                </button>
-                ${months.map(month => `
-                    <button class="month-btn ${selectedMonth === month ? 'active' : ''}" onclick="filterByMonth('${month}')">
-                        ${month}
-                    </button>
-                `).join('')}
-            `;
-        }
-
-        // Filter courses by month
-        function filterByMonth(month) {
-            selectedMonth = month;
-            renderMonthButtons();
-            renderCourses();
-        }
-
-        // Group courses by month
-        function groupCoursesByMonth() {
-            const filtered = selectedMonth === 'all' 
-                ? courses 
-                : courses.filter(c => c.month === selectedMonth);
-            
-            const grouped = {};
-            filtered.forEach(course => {
-                if (!grouped[course.month]) {
-                    grouped[course.month] = [];
-                }
-                grouped[course.month].push(course);
-            });
-            
-            return grouped;
-        }
-
-        // Render courses
-        function renderCourses() {
-            const container = document.getElementById('courseContainer');
-            const grouped = groupCoursesByMonth();
-            const months = Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a));
-
-            container.innerHTML = months.map(month => `
-                <div class="course-section">
-                    <div class="section-header">
-                        <div class="section-title">📅 ${month}</div>
-                        <div class="section-count">${grouped[month].length} Materi</div>
-                    </div>
-                    <div class="course-grid">
-                        ${grouped[month].map(course => `
-                            <div class="course-card" onclick="openVideo(${course.id})">
-                                <div class="course-thumbnail">
-                                    <div class="duration-badge">⏱️ ${course.duration}</div>
-                                    ${course.icon}
-                                </div>
-                                <div class="course-content">
-                                    <h3 class="course-title">${course.title}</h3>
-                                    <p class="course-description">${course.description}</p>
-                                    <div class="course-meta">
-                                        <div class="upload-time">🕒 Diupload: ${course.uploadTime}</div>
-                                        <div class="course-info-row">
-                                            <span class="level-badge">${course.level}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openVideo(courseId) {
-            const course = courses.find(c => c.id === courseId);
-            if (!course) return;
-
-            const modal = document.getElementById('videoModal');
-            const videoContainer = document.getElementById('videoContainer');
-            
-            // Check if it's a catbox video (direct video file) or YouTube embed
-            if (course.videoUrl.includes('catbox.moe') || course.videoUrl.includes('.mp4') || course.videoUrl.includes('.webm')) {
-                videoContainer.innerHTML = `
-                    <video controls controlsList="nodownload" style="width: 100%; height: 100%;">
-                        <source src="${course.videoUrl}" type="video/mp4">
-                        Browser Anda tidak mendukung video.
-                    </video>
-                    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
-                `;
-            } else {
-                videoContainer.innerHTML = `
-                    <iframe src="${course.videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>
-                `;
-            }
-            
-            document.getElementById('modalTitle').textContent = course.title;
-            document.getElementById('modalDescription').textContent = course.description + ' | Durasi: ' + course.duration + ' | Diupload: ' + course.uploadTime + ' | ' + course.month;
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            window.currentCourseId = courseId;
-            renderComments(courseId);
-
-            // Track video view
-            trackVideoView(courseId);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('videoModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            
-            // Exit fullscreen if active
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            }
-            
-            document.getElementById('videoContainer').innerHTML = '<button class="fullscreen-btn" onclick="toggleFullscreen()" title="Layar Penuh">⛶</button>';
-            document.getElementById('commentInput').value = '';
-        }
-
-        function toggleFullscreen() {
-            const videoContainer = document.getElementById('videoContainer');
-            
-            if (!document.fullscreenElement) {
-                // Enter fullscreen
-                if (videoContainer.requestFullscreen) {
-                    videoContainer.requestFullscreen();
-                } else if (videoContainer.webkitRequestFullscreen) {
-                    videoContainer.webkitRequestFullscreen(); // Safari
-                } else if (videoContainer.msRequestFullscreen) {
-                    videoContainer.msRequestFullscreen(); // IE11
-                }
-            } else {
-                // Exit fullscreen
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen(); // Safari
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen(); // IE11
-                }
-            }
-        }
-
-        function addComment() {
-            const name = document.getElementById('nameInput').value.trim();
-            const text = document.getElementById('commentInput').value.trim();
-            
-            if (!name) {
-                alert('Silakan masukkan nama Anda');
-                return;
-            }
-            
-            if (!text) {
-                alert('Silakan tulis komentar Anda');
-                return;
-            }
-
-            const courseId = window.currentCourseId;
-            
-            const newComment = {
-                author: name,
-                text: text,
-                time: new Date().toLocaleString('id-ID'),
-                timestamp: Date.now()
-            };
-
-            // Save to Firebase
-            saveComment(courseId, newComment);
-
-            document.getElementById('commentInput').value = '';
-            
-            // Show success message
-            alert('✅ Komentar berhasil ditambahkan dan tersimpan!');
-        }
-
-        function renderComments(courseId) {
-            const commentList = document.getElementById('commentList');
-            const courseComments = comments[courseId];
-
-            if (!courseComments || Object.keys(courseComments).length === 0) {
-                commentList.innerHTML = '<div class="no-comments">Belum ada komentar. Jadilah yang pertama berkomentar!</div>';
-                return;
-            }
-
-            // Convert object to array and sort by timestamp
-            const commentsArray = Object.values(courseComments).sort((a, b) => b.timestamp - a.timestamp);
-
-            commentList.innerHTML = commentsArray.map(comment => `
-                <div class="comment-item">
-                    <div class="comment-author">${comment.author}</div>
-                    <div class="comment-time">${comment.time}</div>
-                    <div class="comment-text">${comment.text}</div>
-                </div>
-            `).join('');
-        }
-
-        // Initialize
-        loadComments();
-        renderMonthButtons();
-        renderCourses();
-
-        // Close modal when clicking outside
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Autoplay was prevented by browser, try on first user interaction
+                    document.body.addEventListener('click', function() {
+                        audio.play();
+                    }, { once: true });
+                    
+                    document.body.addEventListener('touchstart', function() {
+                        audio.play();
+                    }, { once: true });
+                });
             }
         });
-
-        // ===== ADMIN PANEL FUNCTIONS =====
-        
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('active');
-            document.body.style.overflow = panel.classList.contains('active') ? 'hidden' : 'auto';
-            
-            // Auto focus to password input when panel opens
-            if (panel.classList.contains('active')) {
-                setTimeout(() => {
-                    document.getElementById('adminPassword').focus();
-                }, 300);
-            }
-        }
-
-        function loginAdmin() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === ADMIN_PASSWORD) {
-                isAdminLoggedIn = true;
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('adminContent').style.display = 'block';
-                renderAdminCourseList();
-                renderAdminComments();
-                alert('✅ Login berhasil!');
-            } else {
-                alert('❌ Password salah!');
-            }
-        }
-
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.admin-tab').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-
-            // Refresh data
-            if (tabName === 'manageCourses') {
-                renderAdminCourseList();
-            } else if (tabName === 'manageComments') {
-                renderAdminComments();
-            } else if (tabName === 'analytics') {
-                renderAnalytics();
-            }
-        }
-
-        function addNewCourse() {
-            const title = document.getElementById('newTitle').value.trim();
-            const description = document.getElementById('newDescription').value.trim();
-            const videoUrl = document.getElementById('newVideoUrl').value.trim();
-            const duration = document.getElementById('newDuration').value.trim();
-            const level = document.getElementById('newLevel').value;
-            const icon = document.getElementById('newIcon').value.trim();
-            const month = document.getElementById('newMonth').value.trim();
-
-            if (!title || !description || !videoUrl || !duration || !month) {
-                alert('❌ Harap isi semua field!');
-                return;
-            }
-
-            const newId = courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
-            const now = new Date();
-            const uploadTime = now.toLocaleString('id-ID', { 
-                day: 'numeric', 
-                month: 'short', 
-                year: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            });
-
-            const newCourse = {
-                id: newId,
-                title: title,
-                description: description,
-                videoUrl: videoUrl,
-                duration: duration,
-                level: level,
-                icon: icon || '🎬',
-                month: month,
-                uploadTime: uploadTime
-            };
-
-            // Save to Firebase
-            const coursesRef = database.ref('courses/' + newId);
-            coursesRef.set(newCourse).then(() => {
-                courses.push(newCourse);
-                renderCourses();
-                renderMonthButtons();
-                
-                // Clear form
-                document.getElementById('newTitle').value = '';
-                document.getElementById('newDescription').value = '';
-                document.getElementById('newVideoUrl').value = '';
-                document.getElementById('newDuration').value = '';
-                document.getElementById('newIcon').value = '';
-                document.getElementById('newMonth').value = '';
-
-                alert('✅ Materi berhasil ditambahkan!');
-            });
-        }
-
-        function deleteCourse(courseId) {
-            if (!confirm('⚠️ Yakin ingin menghapus materi ini?')) {
-                return;
-            }
-
-            // Delete from Firebase
-            const courseRef = database.ref('courses/' + courseId);
-            courseRef.remove().then(() => {
-                const index = courses.findIndex(c => c.id === courseId);
-                if (index > -1) {
-                    courses.splice(index, 1);
-                }
-                renderCourses();
-                renderMonthButtons();
-                renderAdminCourseList();
-                alert('✅ Materi berhasil dihapus!');
-            });
-        }
-
-        function renderAdminCourseList() {
-            const container = document.getElementById('adminCourseList');
-            
-            if (courses.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">Belum ada materi</p>';
-                return;
-            }
-
-            container.innerHTML = courses.map(course => `
-                <div class="course-item">
-                    <div class="course-item-info">
-                        <h4>${course.icon} ${course.title}</h4>
-                        <p>📅 ${course.month} | ⏱️ ${course.duration} | 📚 ${course.level}</p>
-                    </div>
-                    <div class="course-actions">
-                        <button class="btn-danger" onclick="deleteCourse(${course.id})">🗑️ Hapus</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function deleteComment(courseId, commentKey) {
-            if (!confirm('⚠️ Yakin ingin menghapus komentar ini?')) {
-                return;
-            }
-
-            const commentRef = database.ref('comments/' + courseId + '/' + commentKey);
-            commentRef.remove().then(() => {
-                alert('✅ Komentar berhasil dihapus!');
-                renderAdminComments();
-            });
-        }
-
-        function renderAdminComments() {
-            const container = document.getElementById('adminCommentList');
-            
-            if (!comments || Object.keys(comments).length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">Belum ada komentar</p>';
-                return;
-            }
-
-            let html = '';
-            Object.keys(comments).forEach(courseId => {
-                const course = courses.find(c => c.id == courseId);
-                const courseTitle = course ? course.title : 'Unknown Course';
-                const courseComments = comments[courseId];
-
-                html += `<div style="margin-bottom: 30px;">
-                    <h4 style="color: #00311e; margin-bottom: 15px;">📹 ${courseTitle}</h4>
-                    <div class="comment-list">`;
-
-                Object.keys(courseComments).forEach(commentKey => {
-                    const comment = courseComments[commentKey];
-                    html += `
-                        <div class="comment-item" style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <div style="flex: 1;">
-                                <div class="comment-author">${comment.author}</div>
-                                <div class="comment-time">${comment.time}</div>
-                                <div class="comment-text">${comment.text}</div>
-                            </div>
-                            <button class="btn-danger" onclick="deleteComment('${courseId}', '${commentKey}')" style="margin-left: 10px;">🗑️</button>
-                        </div>
-                    `;
-                });
-
-                html += `</div></div>`;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // Load courses from Firebase
-        function loadCourses() {
-            const coursesRef = database.ref('courses');
-            coursesRef.once('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    courses.length = 0;
-                    Object.values(data).forEach(course => {
-                        courses.push(course);
-                    });
-                    renderCourses();
-                    renderMonthButtons();
-                }
-            });
-        }
-
-        // Initialize with loading courses
-        loadCourses();
-
-        // Render Analytics Dashboard
-        function renderAnalytics() {
-            // Total visitors
-            document.getElementById('totalVisitors').textContent = analytics.visitors || 0;
-
-            // Total video views
-            const totalViews = analytics.videoViews ? Object.values(analytics.videoViews).reduce((a, b) => a + b, 0) : 0;
-            document.getElementById('totalViews').textContent = totalViews;
-
-            // Total comments
-            const totalComments = comments ? Object.values(comments).reduce((acc, courseComments) => {
-                return acc + Object.keys(courseComments).length;
-            }, 0) : 0;
-            document.getElementById('totalComments').textContent = totalComments;
-
-            // Popular videos
-            renderPopularVideos();
-
-            // Daily activity
-            renderDailyActivity();
-        }
-
-        function renderPopularVideos() {
-            const container = document.getElementById('popularVideos');
-            
-            if (!analytics.videoViews || Object.keys(analytics.videoViews).length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">Belum ada data views</p>';
-                return;
-            }
-
-            // Sort videos by views
-            const sortedVideos = Object.entries(analytics.videoViews)
-                .map(([courseId, views]) => {
-                    const course = courses.find(c => c.id == courseId);
-                    return { course, views };
-                })
-                .filter(item => item.course)
-                .sort((a, b) => b.views - a.views)
-                .slice(0, 5);
-
-            container.innerHTML = sortedVideos.map((item, index) => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: ${index === 0 ? '#fff8e1' : '#fdfdf1'}; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid ${index === 0 ? '#ffc107' : '#00311e'};">
-                    <div>
-                        <div style="font-weight: 600; color: #00311e;">${index + 1}. ${item.course.icon} ${item.course.title}</div>
-                        <div style="font-size: 0.85em; color: #666; margin-top: 5px;">📅 ${item.course.month}</div>
-                    </div>
-                    <div style="background: ${index === 0 ? '#ffc107' : '#00311e'}; color: white; padding: 8px 15px; border-radius: 20px; font-weight: 600;">
-                        👁️ ${item.views} views
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderDailyActivity() {
-            const container = document.getElementById('visitorActivity');
-            
-            if (!analytics.dailyVisits || Object.keys(analytics.dailyVisits).length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #999;">Belum ada data aktivitas</p>';
-                return;
-            }
-
-            // Get last 7 days
-            const last7Days = [];
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                last7Days.push(date.toLocaleDateString('id-ID'));
-            }
-
-            const maxVisits = Math.max(...last7Days.map(date => analytics.dailyVisits[date] || 0), 1);
-
-            container.innerHTML = last7Days.map(date => {
-                const visits = analytics.dailyVisits[date] || 0;
-                const percentage = (visits / maxVisits) * 100;
-                
-                return `
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="font-size: 0.9em; color: #666;">${date}</span>
-                            <span style="font-weight: 600; color: #00311e;">${visits} pengunjung</span>
-                        </div>
-                        <div style="background: #e0e0e0; height: 10px; border-radius: 10px; overflow: hidden;">
-                            <div style="background: linear-gradient(90deg, #00311e 0%, #005a36 100%); height: 100%; width: ${percentage}%; border-radius: 10px; transition: width 0.3s;"></div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Track visitor on page load
-        trackVisitor();
-        loadAnalytics();
     </script>
 </body>
 </html>
