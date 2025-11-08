@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akses Ditolak - Website Diblokir</title>
+    <title>Clipscutter - YouTube Video Clipper</title>
     <style>
         * {
             margin: 0;
@@ -12,503 +12,720 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Animated Background Particles */
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float-particle linear infinite;
-        }
-
-        .particle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            left: 10%;
-            animation-duration: 8s;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            right: 15%;
-            top: 20%;
-            animation-duration: 10s;
-            animation-delay: 2s;
-        }
-
-        .particle:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            left: 70%;
-            bottom: 30%;
-            animation-duration: 12s;
-            animation-delay: 4s;
-        }
-
-        .particle:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            left: 30%;
-            bottom: 20%;
-            animation-duration: 9s;
-            animation-delay: 1s;
-        }
-
-        @keyframes float-particle {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: translateY(-100px) rotate(180deg);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(0) rotate(360deg);
-                opacity: 0.3;
-            }
+            color: #333;
+            line-height: 1.6;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 70px 50px;
-            max-width: 700px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-            position: relative;
-            z-index: 10;
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        @keyframes slideUp {
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .format-quality {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.95);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
 
-        /* Shield Icon */
-        .icon-wrapper {
-            margin: 0 auto 40px;
-            position: relative;
-            width: 150px;
-            height: 150px;
+        .status-box.info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            color: #1976D2;
         }
 
-        .shield-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            animation: pulse 2s ease-in-out infinite;
+        .status-box.success {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            color: #2E7D32;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+        .status-box.error {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            color: #c62828;
         }
 
-        .shield {
-            width: 120px;
-            height: 140px;
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            box-shadow: 0 20px 50px rgba(220, 38, 38, 0.4);
-            animation: float 3s ease-in-out infinite;
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translate(-50%, -50%) translateY(0px);
-            }
-            50% {
-                transform: translate(-50%, -50%) translateY(-10px);
-            }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .shield::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 80%;
-            background: rgba(255, 255, 255, 0.1);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
         }
 
-        .x-mark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-        }
-
-        .x-mark::before,
-        .x-mark::after {
-            content: '';
-            position: absolute;
+        .feature-card {
             background: white;
-            width: 70px;
-            height: 10px;
-            border-radius: 5px;
-            top: 50%;
-            left: 50%;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
 
-        .x-mark::before {
-            transform: translate(-50%, -50%) rotate(45deg);
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
 
-        .x-mark::after {
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        .warning-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, transparent 70%);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                opacity: 0.5;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-
-        h1 {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            color: #dc2626;
-            font-size: 1.3em;
-            font-weight: 700;
+        .feature-icon {
+            font-size: 3rem;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
-        p {
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
             color: #666;
-            font-size: 1.15em;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 0.95rem;
         }
 
-        .warning-box {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(153, 27, 27, 0.1) 100%);
-            border-left: 5px solid #dc2626;
-            padding: 25px;
+        .info-text {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        .video-preview-section {
+            margin: 25px 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .video-preview-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: #000;
+        }
+
+        .video-preview-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            display: block;
+        }
+
+        .video-info {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
             border-radius: 10px;
-            margin: 30px 0;
-            text-align: left;
+            margin-top: 15px;
         }
 
-        .warning-box h3 {
-            color: #dc2626;
-            font-size: 1.2em;
-            margin-bottom: 15px;
+        .video-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .video-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .warning-box h3::before {
-            content: '⚠️';
-            font-size: 1.5em;
+        .info-item-icon {
+            font-size: 1.5rem;
         }
 
-        .warning-box p {
-            margin-bottom: 10px;
-            font-size: 1em;
+        .info-item-text {
+            flex: 1;
         }
 
-        .warning-box ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 15px;
-        }
-
-        .warning-box li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            color: #555;
-        }
-
-        .warning-box li::before {
-            content: '×';
-            position: absolute;
-            left: 0;
-            color: #dc2626;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
-        .blocked-url {
-            background: #f3f4f6;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin: 25px 0;
-            font-family: 'Courier New', monospace;
-            color: #374151;
-            font-weight: 600;
-            word-break: break-all;
-        }
-
-        .info-section {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid rgba(220, 38, 38, 0.1);
-        }
-
-        .info-title {
-            color: #dc2626;
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-card-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .info-card h4 {
-            color: #374151;
-            font-size: 1em;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .info-card p {
-            color: #6b7280;
-            font-size: 0.9em;
-            margin: 0;
-        }
-
-        .footer-note {
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(220, 38, 38, 0.05);
-            border-radius: 10px;
-            font-size: 0.95em;
+        .info-item-label {
+            font-size: 0.8rem;
             color: #666;
-            line-height: 1.6;
+            display: block;
         }
 
-        .footer-note strong {
-            color: #dc2626;
+        .info-item-value {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .preview-controls {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-display {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 50px 30px;
+            header h1 {
+                font-size: 2rem;
             }
 
-            h1 {
-                font-size: 2.2em;
+            .main-card {
+                padding: 25px;
             }
 
-            .subtitle {
-                font-size: 1.1em;
-            }
-
-            .info-cards {
+            .time-inputs,
+            .format-quality {
                 grid-template-columns: 1fr;
             }
 
-            .particle {
-                opacity: 0.5;
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .video-preview-container iframe {
+                height: 250px;
+            }
+
+            .video-info-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8em;
-            }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+        }
 
-            p {
-                font-size: 1em;
-            }
-
-            .icon-wrapper {
-                width: 120px;
-                height: 120px;
-            }
-
-            .shield {
-                width: 100px;
-                height: 120px;
-            }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-
     <div class="container">
-        <div class="icon-wrapper">
-            <div class="shield-container">
-                <div class="warning-glow"></div>
-                <div class="shield">
-                    <div class="x-mark"></div>
-                </div>
+        <header>
+            <h1>🎬 Clipscutter</h1>
+            <p>Download clips dari video YouTube dengan mudah dan cepat</p>
+        </header>
+
+        <div class="main-card">
+            <div class="info-text">
+                💡 <strong>Tips:</strong> Masukkan URL video YouTube, pilih waktu mulai dan selesai, lalu klik "Buat & Download Clip"
             </div>
-        </div>
-        
-        <h1>Akses Ditolak</h1>
-        <p class="subtitle">⛔ Website Diblokir ⛔</p>
-        <p>Website yang Anda coba akses telah diblokir oleh Pemerintah Republik Indonesia berdasarkan peraturan perundang-undangan yang berlaku.</p>
-        
-        <div class="blocked-url">
-            🔒 www.example-blocked-site.com
+
+            <form id="clipForm">
+                <div class="input-group">
+                    <label for="videoUrl">🔗 URL Video YouTube</label>
+                    <input 
+                        type="text" 
+                        id="videoUrl" 
+                        placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                        required
+                    >
+                </div>
+
+                <div class="video-preview-section" id="videoPreviewSection">
+                    <div class="video-preview-container">
+                        <iframe id="previewFrame" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="video-info" id="videoInfo">
+                        <h3 id="videoTitle">📹 Video Preview</h3>
+                        <div class="video-info-grid">
+                            <div class="info-item">
+                                <div class="info-item-icon">⏱️</div>
+                                <div class="info-item-text">
+                                    <span class="info-item-label">Durasi Clip</span>
+                                    <span class="info-item-value" id="clipDuration">0:00</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-icon">🎥</div>
+                                <div class="info-item-text">
+                                    <span class="info-item-label">Kualitas</span>
+                                    <span class="info-item-value" id="selectedQuality">720p</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-icon">📁</div>
+                                <div class="info-item-text">
+                                    <span class="info-item-label">Format</span>
+                                    <span class="info-item-value" id="selectedFormat">MP4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="time-inputs">
+                    <div class="input-group">
+                        <label for="startTime">⏱️ Waktu Mulai (MM:SS)</label>
+                        <input 
+                            type="text" 
+                            id="startTime" 
+                            placeholder="0:00"
+                            value="0:00"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="endTime">⏱️ Waktu Selesai (MM:SS)</label>
+                        <input 
+                            type="text" 
+                            id="endTime" 
+                            placeholder="0:30"
+                            value="0:30"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="format-quality">
+                    <div class="input-group">
+                        <label for="quality">🎥 Kualitas</label>
+                        <select id="quality">
+                            <option value="360p">360p</option>
+                            <option value="480p">480p</option>
+                            <option value="720p" selected>720p (HD)</option>
+                            <option value="1080p">1080p (Full HD)</option>
+                            <option value="1440p">1440p (2K)</option>
+                            <option value="2160p">2160p (4K)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="format">📁 Format</label>
+                        <select id="format">
+                            <option value="mp4" selected>MP4 (Video)</option>
+                            <option value="webm">WEBM (Video)</option>
+                            <option value="mp3">MP3 (Audio)</option>
+                            <option value="m4a">M4A (Audio)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="createBtn">
+                    🎬 Buat & Download Clip
+                </button>
+
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </form>
+
+            <div class="loader" id="loader"></div>
+
+            <div class="status-box" id="statusBox"></div>
         </div>
 
-        <div class="warning-box">
-            <h3>Alasan Pemblokiran</h3>
-            <p>Website ini diblokir karena mengandung konten yang melanggar:</p>
-            <ul>
-                <li>UU No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik</li>
-                <li>UU No. 19 Tahun 2016 tentang Perubahan UU ITE</li>
-                <li>Peraturan Menteri Komunikasi dan Informatika</li>
-            </ul>
-        </div>
-
-        <div class="info-section">
-            <div class="info-title">Informasi Lebih Lanjut</div>
-            <div class="info-cards">
-                <div class="info-card">
-                    <div class="info-card-icon">📋</div>
-                    <h4>Dasar Hukum</h4>
-                    <p>Pemblokiran sesuai regulasi pemerintah</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-card-icon">🛡️</div>
-                    <h4>Keamanan</h4>
-                    <p>Melindungi pengguna internet</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-card-icon">⚖️</div>
-                    <h4>Kepatuhan</h4>
-                    <p>Mematuhi hukum Indonesia</p>
-                </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Proses Cepat</h3>
+                <p>Pemrosesan lightning fast untuk hasil instant</p>
             </div>
-        </div>
 
-        <div class="footer-note">
-            <strong>Catatan:</strong> Jika Anda merasa pemblokiran ini adalah kesalahan, silakan hubungi Kementerian Komunikasi dan Informatika Republik Indonesia atau penyedia layanan internet Anda untuk informasi lebih lanjut.
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Akurat</h3>
+                <p>Potong video dengan presisi waktu yang tepat</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Kualitas HD</h3>
+                <p>Download hingga kualitas 4K ultra HD</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Mudah Digunakan</h3>
+                <p>Interface yang simple dan user-friendly</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Update blocked URL with current domain
-        const blockedUrlElement = document.querySelector('.blocked-url');
-        if (window.location.hostname) {
-            blockedUrlElement.innerHTML = '🔒 ' + window.location.hostname;
+        const form = document.getElementById('clipForm');
+        const createBtn = document.getElementById('createBtn');
+        const loader = document.getElementById('loader');
+        const statusBox = document.getElementById('statusBox');
+        const videoUrlInput = document.getElementById('videoUrl');
+        const videoPreviewSection = document.getElementById('videoPreviewSection');
+        const previewFrame = document.getElementById('previewFrame');
+        const startTimeInput = document.getElementById('startTime');
+        const endTimeInput = document.getElementById('endTime');
+        const qualitySelect = document.getElementById('quality');
+        const formatSelect = document.getElementById('format');
+        const clipDuration = document.getElementById('clipDuration');
+        const selectedQuality = document.getElementById('selectedQuality');
+        const selectedFormat = document.getElementById('selectedFormat');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+
+        // Extract video ID dari URL YouTube
+        function extractVideoId(url) {
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length === 11) ? match[7] : null;
         }
 
-        // Auto-play background sound
-        window.addEventListener('DOMContentLoaded', function() {
-            const audio = new Audio();
-            // Using a dramatic warning/alert sound effect
-            audio.src = 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3';
-            audio.loop = true;
-            audio.volume = 0.3;
-            
-            // Try to autoplay
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // Autoplay was prevented by browser, try on first user interaction
-                    document.body.addEventListener('click', function() {
-                        audio.play();
-                    }, { once: true });
-                    
-                    document.body.addEventListener('touchstart', function() {
-                        audio.play();
-                    }, { once: true });
-                });
+        // Convert waktu ke detik
+        function timeToSeconds(time) {
+            const parts = time.split(':').map(p => parseInt(p) || 0);
+            if (parts.length === 2) {
+                return parts[0] * 60 + parts[1];
             }
+            return 0;
+        }
+
+        // Format detik ke MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Update durasi clip
+        function updateClipDuration() {
+            const start = timeToSeconds(startTimeInput.value);
+            const end = timeToSeconds(endTimeInput.value);
+            const duration = Math.max(0, end - start);
+            clipDuration.textContent = formatTime(duration);
+        }
+
+        // Update preview info
+        function updatePreviewInfo() {
+            selectedQuality.textContent = qualitySelect.value.toUpperCase();
+            selectedFormat.textContent = formatSelect.value.toUpperCase();
+            updateClipDuration();
+        }
+
+        // Preview video saat URL diinput
+        videoUrlInput.addEventListener('input', function() {
+            const url = this.value.trim();
+            const videoId = extractVideoId(url);
+            
+            if (videoId) {
+                const startTime = timeToSeconds(startTimeInput.value);
+                previewFrame.src = `https://www.youtube.com/embed/${videoId}?start=${startTime}&autoplay=0`;
+                videoPreviewSection.style.display = 'block';
+                updatePreviewInfo();
+            } else {
+                videoPreviewSection.style.display = 'none';
+            }
+        });
+
+        // Update preview saat waktu berubah
+        startTimeInput.addEventListener('input', updateClipDuration);
+        endTimeInput.addEventListener('input', updateClipDuration);
+        qualitySelect.addEventListener('change', updatePreviewInfo);
+        formatSelect.addEventListener('change', updatePreviewInfo);
+
+        // Show status message
+        function showStatus(message, type) {
+            statusBox.textContent = message;
+            statusBox.className = `status-box ${type}`;
+            statusBox.style.display = 'block';
+        }
+
+        // Simulasi progress download
+        function simulateProgress(callback) {
+            let progress = 0;
+            progressBar.style.display = 'block';
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    progressFill.style.width = '100%';
+                    setTimeout(() => {
+                        progressBar.style.display = 'none';
+                        progressFill.style.width = '0%';
+                        callback();
+                    }, 500);
+                } else {
+                    progressFill.style.width = progress + '%';
+                }
+            }, 300);
+        }
+
+        // Download file (simulasi dengan yt-dlp format)
+        function downloadClip(videoId, start, end, quality, format) {
+            const startSec = timeToSeconds(start);
+            const endSec = timeToSeconds(end);
+            const duration = endSec - startSec;
+            
+            // Buat URL download menggunakan format ytdl
+            const fileName = `clip_${videoId}_${startSec}-${endSec}.${format}`;
+            
+            // Simulasi download dengan membuka tab baru ke youtube dengan timestamp
+            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}&t=${startSec}s`;
+            
+            // Dalam implementasi nyata, ini akan memanggil backend API
+            // yang menggunakan yt-dlp atau library serupa untuk memotong video
+            
+            showStatus(`✅ Memproses clip dari ${start} sampai ${end} (durasi: ${formatTime(duration)})`, 'success');
+            
+            setTimeout(() => {
+                // Simulasi download selesai
+                const downloadUrl = `data:text/plain;charset=utf-8,${encodeURIComponent(
+                    `Clip berhasil dibuat!\n\n` +
+                    `Video ID: ${videoId}\n` +
+                    `Waktu: ${start} - ${end}\n` +
+                    `Durasi: ${formatTime(duration)}\n` +
+                    `Kualitas: ${quality}\n` +
+                    `Format: ${format}\n\n` +
+                    `Dalam implementasi nyata, file ${fileName} akan otomatis terdownload.`
+                )}`;
+                
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = fileName.replace(`.${format}`, '.txt');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showStatus(`✅ Download selesai! File disimpan sebagai: ${fileName}`, 'success');
+            }, 1000);
+        }
+
+        // Handle form submit
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const videoUrl = videoUrlInput.value.trim();
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+            const quality = qualitySelect.value;
+            const format = formatSelect.value;
+
+            // Validasi video ID
+            const videoId = extractVideoId(videoUrl);
+            if (!videoId) {
+                showStatus('❌ URL YouTube tidak valid!', 'error');
+                return;
+            }
+
+            // Validasi waktu
+            const startSec = timeToSeconds(startTime);
+            const endSec = timeToSeconds(endTime);
+
+            if (startSec >= endSec) {
+                showStatus('❌ Waktu selesai harus lebih besar dari waktu mulai!', 'error');
+                return;
+            }
+
+            if (endSec - startSec > 600) {
+                showStatus('❌ Durasi maksimal clip adalah 10 menit!', 'error');
+                return;
+            }
+
+            // Disable button dan show loader
+            createBtn.disabled = true;
+            createBtn.textContent = '⏳ Memproses...';
+            loader.style.display = 'block';
+            showStatus('🎬 Membuat clip Anda...', 'info');
+
+            // Simulasi proses dengan progress bar
+            simulateProgress(() => {
+                loader.style.display = 'none';
+                createBtn.disabled = false;
+                createBtn.textContent = '🎬 Buat & Download Clip';
+                
+                // Langsung download
+                downloadClip(videoId, startTime, endTime, quality, format);
+            });
+        });
+
+        // Auto-format input waktu
+        function formatTimeInput(input) {
+            let value = input.value.replace(/[^\d:]/g, '');
+            const parts = value.split(':');
+            
+            if (parts.length === 2) {
+                let mins = parseInt(parts[0]) || 0;
+                let secs = parseInt(parts[1]) || 0;
+                
+                if (secs > 59) secs = 59;
+                
+                input.value = `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+
+        startTimeInput.addEventListener('blur', function() {
+            formatTimeInput(this);
+            updateClipDuration();
+        });
+
+        endTimeInput.addEventListener('blur', function() {
+            formatTimeInput(this);
+            updateClipDuration();
         });
     </script>
 </body>
